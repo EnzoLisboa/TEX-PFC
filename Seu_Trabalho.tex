@@ -185,6 +185,64 @@ O firmware também monitora o estado dos sensores e da potência aplicada, adota
 
 \section{Projeto do Módulo Sensor}
 
+O Módulo Sensor é responsável por medir a iluminância do ambiente e transmitir esses dados para o Módulo de Controle. Ele atua de forma independente e distribuída, permitindo a instalação de múltiplos sensores em diferentes locais do ambiente.
+
+Os pontos centrais para o projeto foram:
+\begin{itemize}
+    \item Precisão nas medições de iluminância;
+    \item Baixo consumo energético e operação autônoma;
+    \item Comunicação confiável e sem fio;
+    \item Compactação do circuito.
+\end{itemize}
+
+Baseado nesses requisitos, o circuito do módulo sensor foi desenvolvido no software \textit{KiCad} como mostra a Figura \ref{fig:proj_sens}.
+
+\subsection{Hardware}
+
+\subsubsection{Microcontrolador}
+
+O microcontrolador é o núcleo do módulo sensor, responsável por coletar os dados do sensor de iluminância e transmiti-los ao módulo de controle. A Tabela~\ref{tab:microcontroladores_sensores} apresenta um comparativo entre os principais modelos considerados para este projeto, destacando os parâmetros técnicos mais relevantes para a aplicação.
+
+\begin{table}[htb]
+  \centering
+  \caption{Comparativo entre microcontroladores candidatos ao módulo de sensores.}
+  \begin{tabular}{m{3.5cm}m{2.4cm}m{2.2cm}m{2.6cm}m{3.8cm}}
+    \Linha % linha grossa
+    {\bf Modelo} & {\bf Arquitetura} & {\bf Frequência} & {\bf Comunicação} & {\bf Observações} \\
+    \Linha % linha grossa
+    ESP8266 (NodeMCU-V3) & 32 bits & 80 MHz & UART, SPI, I\textsuperscript{2}C, Wi-Fi & Boa conectividade Wi-Fi e baixo custo, porém ausência de BLE nativo, o que limita a comunicação direta com o controlador. \\
+    \hline
+    ESP32-S (NodeMCU-32S) & 32 bits Dual-Core & 240 MHz & UART, SPI, I\textsuperscript{2}C, Wi-Fi, BLE & Alto desempenho e conectividade dupla (Wi-Fi e BLE), porém com maior consumo e dimensões que dificultam o uso em módulos compactos alimentados por bateria. \\
+    \hline
+    ESP32-C3 (Super-Mini) & 32 bits RISC-V & 160 MHz & UART, SPI, I\textsuperscript{2}C, Wi-Fi, BLE & Combina BLE nativo, baixo consumo e formato reduzido, ideal para módulos distribuídos de medição. \\
+    \Linha % linha grossa
+  \end{tabular}
+  \FonteTab{Próprio autor, com base em \cite{Espressif, EspressifESP8266, EspressifC3}.}
+  \label{tab:microcontroladores_sensores}
+\end{table}
+
+Com base nesses fatores, o microcontrolador \textit{ESP32-C3 (Super-Mini)} foi selecionado para o módulo sensor. A escolha se deve ao seu tamanho compacto com desempenho suficiente para a aquisição e transmissão dos dados de iluminância, além do suporte nativo a \gls{BLE}, que viabiliza a comunicação eficiente com o Módulo de Controle.
+
+\subsubsection{Sensor de Iluminância}
+
+O sensor de iluminância escolhido para o módulo sensor foi o \textit{BH1750}, um sensor digital de alta precisão que utiliza comunicação I\textsuperscript{2}C para transmitir os dados de iluminância ao microcontrolador. O \textit{BH1750} oferece uma faixa de medição de 1 a 65535 lux, com resolução de 1 lux, apresentando erro típico de ±20\%. Além disso, seu tempo de conversão é ajustável entre 120 ms e 180 ms, o que oferece uma boa relação entre velocidade de resposta e estabilidade de leitura. O consumo típico é de 0,12 mA durante a medição e 0,01 µA em modo de espera, características que o tornam adequado para sistemas alimentados por bateria.
+
+\subsubsection{Alimentação}
+
+O módulo de sensores é alimentado por um conjunto de duas baterias 18650 de 2200 mAh ligadas em série, fornecendo tensão nominal de 7,4 VCC, suficiente para operação autônoma e sem fio. Essa tensão é reduzida para 3,3 VCC pelo conversor DD4012SA, um regulador DC-DC step-down de alta eficiência ($\simeq 90\%$), com corrente de saída de até 1,2 A, garantindo alimentação estável para o ESP32-C3 e o BH1750 com baixo aquecimento.
+
+\subsection{Firmware}
+
+O firmware foi desenvolvido para realizar a leitura periódica da iluminância, transmitir os dados ao controlador via BLE e gerenciar o consumo energético. A estrutura modular do código permite a replicação de vários sensores com configuração individual, sem necessidade de alterações estruturais no programa.
+
+\subsubsection{Inicialização e comunicação}
+Durante a inicialização, o microcontrolador configura o barramento de comunicação e ativa o sensor de iluminância em modo de medição de alta precisão. Após a verificação de funcionamento, estabelece-se a comunicação \gls{BLE}, por meio da qual o módulo é identificado individualmente dentro da rede de sensores e passa a transmitir as leituras de iluminância.
+
+\subsubsection{Transmissão e gerenciamento de dados}
+O firmware implementa um serviço de comunicação padronizado, capaz de enviar medições e receber comandos do controlador principal. Essa troca contínua garante a sincronização dos dados e permite, por exemplo, o acionamento remoto do modo de economia de energia ou a atualização de parâmetros de medição. Caso ocorra perda de conexão, o módulo reinicia automaticamente o processo de publicidade \gls{BLE} até que o vínculo seja restabelecido, assegurando continuidade na transmissão das informações.
+
+\subsubsection{Economia de energia}
+A estratégia de economia de energia combina o modo de espera do sensor com o modo de sono profundo do microcontrolador, definindo um ciclo de repouso de aproximadamente cinco minutos entre as leituras. Durante esse intervalo, apenas os circuitos essenciais permanecem ativos, reduzindo significativamente o consumo médio. Essa abordagem garante autonomia prolongada das baterias e operação estável em longo prazo, mantendo a confiabilidade das medições em campo.
 
 
 \section{Projeto do Módulo Supervisório}
