@@ -1,0 +1,26 @@
+% 
+% Obrigatório em PFC
+%
+\chapter{Metodologia}
+
+O presente projeto foi desenvolvido por meio de uma abordagem \textbf{aplicada, experimental e quantitativa}, com foco na implementação de um \textbf{sistema embarcado de iluminação adaptativa} em conformidade com as normas \gls{NBR} 8995-1 e \gls{NHO} 11. O método adotado envolveu o desenvolvimento do sistema embarcado, seguido por testes experimentais e validação dos resultados obtidos. As etapas metodológicas foram organizadas da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Desenvolvimento do Sistema Embarcado} – O sistema foi dividido em três módulos principais: sensores, controlador e supervisório.
+    \begin{itemize}
+        \item \textbf{Sensores} – Responsáveis pelas leituras periódicas de iluminância e transmissão dos dados ao controlador. Foram implementados modos de economia de energia para reduzir o consumo durante períodos de inatividade.
+
+        \item \textbf{Controlador} – Executa o algoritmo de controle fuzzy, ajustando a potência luminosa por meio de um circuito de corte de fase com detecção de cruzamento por zero e acionamento por TRIAC.
+
+        \item \textbf{Supervisório} – Desenvolvido em \textit{Python}, permite o monitoramento em tempo real, com registro automático em arquivos e geração de gráficos.
+    \end{itemize}
+
+    \item \textbf{Testes Experimentais} – O sistema foi instalado em ambiente real e submetido a diferentes condições de iluminação natural e artificial. Durante os testes, foram registrados valores de iluminância, potência da lâmpada e comportamento do controle fuzzy.
+
+    \item \textbf{Validação dos Resultados} – Com base nos dados obtidos, foi avaliada a capacidade do sistema em manter os níveis de iluminância próximos ao setpoint definido, bem como a eficiência energética alcançada.
+\end{itemize}
+
+Todas as etapas foram integradas em ambiente controlado, com o sistema operando em tempo real, o que permitiu validar a eficiência do controle fuzzy no ajuste automático da intensidade luminosa.
+
+
+

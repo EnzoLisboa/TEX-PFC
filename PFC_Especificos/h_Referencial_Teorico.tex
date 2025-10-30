@@ -1,0 +1,245 @@
+% 
+% Obrigatório em PFC
+% 
+
+\chapter{Estado da Arte}
+
+A história da iluminação é uma jornada que reflete a capacidade do homem em inovar e em se adaptar às necessidades de sua época. Durante primórdios da humanidade, o fogo era a única fonte de luz, utilizado para iluminação e socialização noturna. Há aproximadamente 1,5 milhões de anos, os ancestrais humanos aprenderam a conservar e utilizar o fogo, garantindo uma ferramenta essencial para o desenvolvimento social \cite{Guarnieri2015}.
+
+Com o passar dos anos, novas formas de iluminação foram desenvolvidas. A iluminação dependia de combustíveis sólidos ou líquidos, como óleo de oliva, cera de abelha e óleo animal. No Egito Antigo, as lâmpadas eram feitas de cerâmica e abastecidas com óleos vegetais, sendo utilizadas em templos e residências. Na Roma Antiga, o uso de velas e tochas era comum, os romanos desenvolveram métodos para produção de velas, utilizando sebo animal e cera de abelha. Um caso excepcional foi registrado na china há cerca de 1700 anos, onde o gás natural era canalizado por tubos de bambu e utilizado como combustível \cite{James1995}. 
+
+No século XVI, o óleo de baleia tornou-se um combustível lucrativo, especialmente após o início da caça às baleias no Atlântico Norte por nações europeias \cite{Proulx1968}. No entanto, foi apenas no final do século XVIII, com a Revolução Industrial, que o gás de carvão abriu caminho para uma tecnologia de iluminação mais avançada.
+
+O primeiro sistema experimental de iluminação a gás foi intalado em 1784 pelo professor Jean-Pierre Minkelers na Universidade de Leuven, na Bélgica. A tecnologia foi aprimorada e levada ao Reino Unido por William Murdoch em 1792. Em 1807, Fredrick Winsor instalou uma rede de iluminação em Pall Mall, Londres que foi um sucesso comercial em áreas urbanas, em áreas rurais lâmpadas a óleo e velas ainda eram as únicas fontes de luz viávies \cite{Penzel1978}.
+
+Em 1800, Alessandro Volta inventou a pilha elétrica, fornecendo uma fonte confiável de energia elétrica e permitindo experimentos científicos com iluminação elétrica. O químico inglês Humphry Davy demonstrou a primeira lâmpada elétrica em 1809, utilizando um grande conjunto de pilhas para gerar gerar uma descarga luminosa entre dois diodos de carvão, que apesar de uma intensa fonte de luz gerava muito calor e consumia muita energia, inviabilizando o uso doméstico \cite{Dredge2014}.
+
+No final do século XIX os geradores elétricos começaram a se tornar mais eficientes, tornando a iluminação elétrica comercialmente viável. Entre as primeiras aplicações, destacam-se os experimentos do engenheiro russo Pawel Yablochkov, que desenvolveu a "vela de Yablochkov" uma lâmpada de arco de baixa potência \cite{Dredge2014}. 
+
+A grande revolução ocorreu com a invenção da lâmpada incandescente. Joseph Swan e Thomas Edison foram pioneiros nessa tecnologia, e em 1879, Edison desenvolveu uma lâmpada de filamento de carbono que durava várias horas antes de se apagar. Isso permitiu a eletrificação em grande escala. Em 1882, Edison instalou a primeira rede elétrica comercial em Nova York, iluminando edifícios com lâmpadas incandescentes e inaugurando a era da eletricidade como principal fonte de luz \cite{Dredge2014}.
+
+No início do século XX, a lâmpada incandescente passou por melhorias significativas. Em 1904, Sándor Just e Franjo Hanaman patentearam o filamento de tungstênio, que aumentou a eficiência das lâmpadas. Outra inovação importante foi a lâmpada de gás inerte, desenvolvida por Irwing Langmuir em 1913, que usava nitrogênio e argônio para prolongar a vida útil do filamento \cite{Bright1949}.
+
+Além das lâmpadas incandescentes, novas tecnologias de iluminação surgiram, como a lâmpada de vapor de mercúrio, inventada por Peter Cooper Hewitt em 1901, a lâmpada de néon, criada por George Claude em 1909 e a lâmpada fluorescente em 1938 por Nikola Tesla \cite{Bright1949}.
+
+O LED teve origem em 1907, quando Henry J. Round observou a emissão de luz em diodos de carbeto de silício, mas foi Oleg Losev, um cientista russo autodidata, quem realmente desenvolveu o conceito na década de 1920. Losev estudou a emissão de luz em diodos de carbeto de silício e zinco, compreendendo sua natureza não térmica. No entanto, suas contribuições foram esquecidas após sua morte em 1942. Na década de 1960, pesquisadores como Nick Holonyak redescobriram e consolidaram a tecnologia do LED \cite{Zheludev2007}. Desde os anos 2000, os LEDs se tornaram a principal opção de iluminação para residências, empresas e espaços públicos, promovendo sustentabilidade e economia de energia.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Referencial Teórico}
+
+
+
+\section{Sistemas Embarcados}
+
+Os sistermas embarcados estão presentes em dispositivos do cotidiano, como eletrodomésticos e automóveis. Diferente dos computadores pessoais estes dispositivos são projetados para realizar tarefas específicas, combinando, software e periféricos de maneira dedicada \cite{Chase2007}. A demanda crescente por automação e eficiência energética impulsiona os estudos na área de sistemas embarcados, tornando-se essencial compreender seu desenvolvimento, funcionamento e aplicações. 
+
+\subsection{Histórico e Evolução}
+
+O conceito de sistemas embarcados surgiu no final da década de 1960, inicialmente aplicado ao controle de equipamentos telefônicos. Na época, os computadores eram grandes e caros, dificultando sua utilização em sistemas especializados \cite{Chase2007}.
+
+Com o avanço da eletrônica e o desenvolvimento dos microprocessadores na década de 1970, tornou-se possível a criação de dispositivos menores e mais acessíveis. O desenvolvimento de linguagens de programação de mais alto nível também contribuiu para a popularização desses sistemas \cite{Chase2007}.
+
+Nos dias atuais, os sistemas embarcados estão em constante evolução, incorporando inteligência artificial, aprendizado de máquina e conectividade com a internet, tornando-se elementos essenciais para a Indústria 4.0 \cite{Chase2007}.
+
+
+\subsection{Conceitos e Características}
+
+Um sistema é classificado como embarcado quando é dedicado a uma única tarefa e interage continuamente com o ambiente por meio de sensores e atuadores. A principal diferença entre um sistema embarcado e um sistema computacional genérico é que o primeiro tem sua arquitetura voltada para otimização e eficiência na execução de funções específicas \cite{Chase2007}.
+
+As principais caracteríticas são:
+\begin{itemize}
+    \item \textbf{Capacidade computacional integrada:} São desenvolvidos para operar de maneira independente, sem a necessidade de interação constante do usuário.
+    \item \textbf{Eficiência energética e autonomia:} Projetados para consumir pouca energia, muitas vezes operando com baterias de longa duração.
+    \item \textbf{Interação com sensores e atuadores:} Captam informações do ambiente e tomam decisões em tempo real.
+    \item \textbf{Software especializado:} Seu código é escrito de forma otimizada para um hardware específico.
+    \item \textbf{Projeto voltado para aplicação específica:} Cada sistema embarcado é desenhado para atender a uma função específica, sem flexibilidade para outras tarefas.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Controle}
+
+O controle de sistemas variáveis é fundamental na engenharia, responsável por assegurar que sistemas físicos ou eletrônicos ajam conforme um comportamente escolhido. Geralmente o o controle objetiva ajustar variáveis como temperatura, velocidade ou iluminância, reduzindo o erro entre o valor medido e o valor de referência. Portanto a realimentação é o princípio bas edos sistemas de controle, permitindo a correção continua do desempenho do sistema, tornando-o mais preciso, estável e robusto diante das variações externas.
+
+Em um modelo convencional de malha fechada, sensores medem a variável a ser controlada e o controlador processa a diferença entre os dados medidos e a referência, gerando um sinal de correção para os atuadores. O comportamento dinâmico é avaliado por critérios como tempo de acomodação, tempo de subida, sobressinal, erro em regime permanente e margem de estabilidade \cite{Franklin2013}.
+
+Com os avanços da eletrônica e da computação, o controle migrou do domínio analógico, baseado em circuitos RC com amplificadores operacionais, para o digital, onde as variáveis são discretizadas e processadas digitalmente. Essa mudança introduziu o uso da trasnformada Z como ferramenta matemática para representar e analisar sistemas de controle.
+
+Em sistemas de controle digital os sinais analógicos medidos pelos sensores são convertidos em valores numéricos por conversores A/D. Esses valores são processados por algorítimos no microcontrolador, resultando em um sinal de saída digital que é transformado por conversores D/A em um sinal analógico que vai acionar os atuadores. \cite{Ogata2010}.
+
+\subsection{Lógica Fuzzy}
+A lógica fuzzy é uma extensão da lógica clássica que permite representar incertezas e variações contínuas. Diferente da lógica booleana, que trabalha apenas com valores verdadeiros ou falsos, a lógica fuzzy utiliza graus de pertinência entre 0 e 1, permitindo que uma variável pertença parcialmente a diferentes conjuntos.
+
+Nos sistemas de controle, essa abordagem é útil quando o modelo matemático da planta é difícil de determinar. Em vez de equações exatas, o comportamento é definido por regras linguísticas, que descrevem como o sistema deve reagir a cada situação, de forma semelhante ao raciocínio humano \cite{Habib-Doutorado}.
+
+Um controlador fuzzy é composto por três etapas principais:
+\begin{itemize}
+    \item Fuzzificação, que converte as variáveis de entrada em valores linguísticos usando funções de pertinência;
+    \item Inferência, onde as regras “SE... ENTÃO...” são aplicadas para determinar as respostas possíveis;
+    \item Defuzzyficação, que transforma o resultado difuso em um valor numérico de saída.
+\end{itemize}
+
+Assim, a lógica fuzzy possibilita um controle adaptativo e eficiente, capaz de atuar mesmo sob incertezas e mudanças nas condições do ambiente. Essa característica faz com que o controlador fuzzy seja adequado para aplicações de iluminação inteligente, combinando simplicidade de implementação com desempenho robusto.
+
+
+\subsection{Controle por Corte de Fase}
+O controle por corte de fase é muito utilizado para controle de potência a cargas em sistemas \gls{CA}. Diferente da Modulação por Largura de Pulso (\gls{PWM}), que varia o tempo de condução em um ciclo de trabalho fixo, o corte de fase controla o momento em que a tensão \gls{CA} é aplicada a carga, cortando uma parte da onda senoidal em cada ciclo. Esssa técnica é eficaz para cargas resistivas ou indutivas, como lâmpadas e motores \gls{CA}
+
+\subsubsection{Funcionamento}
+
+Essa técnica funciona interrompendo parte da onda senoidal da tensão \gls{CA} em cada semiciclo. O ângulo de disparo determina o ponto no qual o \gls{TRIAC} é acionado, permitindo que a corrente flua para a carga. Quanto maior o ângulo de disparo, menor será a potência entregue à carga \cite{Rashid2014}.
+
+A relação entre o ângulo de disparo e a potência pode ser expressa pela Equação \ref{eq:potencia_corte_fase}.
+
+\begin{equation}
+     P = P_{\text{max}} \left(1 - \frac{\alpha}{\pi} + \frac{\sin(2\alpha)}{2\pi}\right)
+    \label{eq:potencia_corte_fase}
+\end{equation}
+
+Sendo que:\\
+\vspace{-1.5cm}
+\begin{tabbing}
+    \hspace{1cm}  \= \hspace{1cm} \= \kill \\
+    \gls{P}       \> \(\Rightarrow\) \> Potência média entregue à carga; \\
+    \gls{Pmax} \> \(\Rightarrow\) \> Potência máxima (quando \(\alpha = 0\)); \\
+    \gls{alpha}    \> \(\Rightarrow\) \> Ângulo de disparo em radianos; \\
+    \gls{pi}     \> \(\Rightarrow\) \> Constante pi (\(\approx 3.1416\)); \\
+\end{tabbing}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Normas Técnicas}
+
+\subsection{ABNT NBR ISO/CIE 8995-1}
+
+A \gls{NBR} 8995-1 \cite{ISOCIE} estabelece os requisitos para a iluminação de ambientes de trabalho internos, visando garantir que as tarefas visuais sejam realizadas de forma eficiente, segura e confortável. A norma abrange tanto aspectos quantitativos, como os níveis de iluminância, quanto aspectos qualitativos, como a distribuição da luminância, o controle do ofuscamento e a reprodução de cores. O objetivo principal é proporcionar um ambiente luminoso que promova o bem-estar, a segurança e a produtividade dos trabalhadores.
+
+A norma é aplicável a uma ampla variedade de ambientes de trabalho, desde escritórios até instalações industriais, e considera tanto a iluminação artificial quanto a natural. Além disso, a \gls{NBR} 8995-1 fornece diretrizes para o planejamento, projeto e verificação de sistemas de iluminação, garantindo que os requisitos mínimos sejam atendidos.
+
+\subsubsection{Critérios de Projeto de Iluminação}
+\paragraph{Ambiente Luminoso}
+
+O ambiente luminoso é um fator crucial para o desempenho visual e o conforto dos trabalhadores. A norma define que uma boa iluminação deve proporcionar:
+
+\begin{itemize}
+    \item \textbf{Conforto visual:} Sensação de bem-estar e conforto para os trabalhadores.
+    \item \textbf{Desempenho visual:} Capacidade de realizar tarefas visuais de forma rápida e precisa, mesmo em condições desafiadoras.
+    \item \textbf{Segurança visual:} Detecção de perigos e movimentação segura no ambiente de trabalho.
+\end{itemize}
+
+\paragraph{Distribuição da Luminância}
+
+A distribuição da luminância no campo de visão é essencial para a adaptação dos olhos e a visibilidade das tarefas. A norma recomenda que a luminância seja bem balanceada, evitando contrastes excessivos que possam causar fadiga visual ou desconforto. A luminância das superfícies internas, como teto, paredes, planos de trabalho e piso, deve ser cuidadosamente considerada, com faixas de refletância recomendadas para cada superfície.
+
+
+Para alcançar esses objetivos, a norma estabelece parâmetros como a distribuição da luminância, a iluminância, o controle do ofuscamento, a direcionalidade da luz, a aparência e a reprodução de cores, a cintilação, a luz natural e a manutenção do sistema de iluminação.
+
+\paragraph{Iluminância}
+
+A iluminância é a quantidade de luz que incide sobre uma superfície e é medida em lux (\gls{lux}). A norma estabelece valores mínimos de iluminância mantida para diferentes tipos de tarefas e ambientes. A iluminância mantida é o valor abaixo do qual a iluminância média não deve cair durante o período de uso do sistema de iluminação.
+
+A norma também define uma escala de iluminância, que varia de 20 \gls{lux} a 5000 \gls{lux}, dependendo da complexidade da tarefa visual. Para tarefas que exigem maior precisão, como trabalhos de inspeção ou leitura de documentos, são recomendados níveis mais altos de iluminância. Além disso, a iluminância no entorno imediato da área de tarefa deve ser proporcional à iluminância da tarefa, garantindo uma distribuição uniforme da luz.
+
+\paragraph{Ofuscamento}
+O ofuscamento é uma sensação visual desagradável causada por fontes de luz excessivamente brilhantes ou por reflexões em superfícies especulares. A norma classifica o ofuscamento em duas categorias:
+
+\begin{itemize}
+    \item \textbf{Ofuscamento desconfortável:} Causa desconforto visual, mas não impede a realização da tarefa.
+    \item \textbf{Ofuscamento incapacitante:} Prejudica diretamente a visão, podendo levar a erros ou acidentes.
+\end{itemize}
+
+Para controlar o ofuscamento, a norma recomenda o uso de luminárias com ângulos de corte adequados e a limitação da luminância das superfícies brilhantes. O Índice de Ofuscamento Unificado (\gls{UGR}) é utilizado para quantificar o nível de desconforto causado pelo ofuscamento, com valores máximos recomendados para diferentes tipos de ambientes.
+
+\paragraph{Direcionalidade da Luz}
+
+A direcionalidade da luz influencia a modelagem do ambiente e a visibilidade das tarefas. A norma recomenda que a luz seja direcionada de forma a destacar objetos e revelar texturas, sem criar sombras excessivas. A iluminação direcional é particularmente importante para tarefas que envolvem detalhes finos, como trabalhos de gravação ou inspeção.
+
+\paragraph{Aspectos da Cor}
+
+A aparência e a reprodução de cores são fatores importantes para o conforto visual e a precisão das tarefas. A norma define três categorias de temperatura de cor correlata (\gls{Tcp}):
+
+\begin{itemize}
+    \item \textbf{Luz quente:} Abaixo de 3300 Kelvin (\gls{kelvin}).
+    \item \textbf{Luz intermediária:} Entre 3300 \gls{kelvin} e 5300 \gls{kelvin}.
+    \item \textbf{Luz fria:} Acima de 5300 \gls{kelvin}. 
+\end{itemize}
+
+A escolha da temperatura de cor depende do ambiente e da tarefa, sendo que a luz fria é geralmente preferida em climas quentes, enquanto a luz quente é mais adequada para climas frios. Além disso, a norma estabelece valores mínimos para o índice geral de reprodução de cor (\gls{Ra}), que mede a capacidade da fonte de luz de reproduzir cores de forma fiel. Para a maioria dos ambientes de trabalho, o \gls{Ra} mínimo recomendado é 80.
+
+\paragraph{Luz Natural}
+
+A luz natural é uma fonte importante de iluminação e pode ser utilizada para complementar ou substituir a iluminação artificial. A norma recomenda que a luz natural seja controlada para evitar ofuscamento e desconforto térmico, especialmente em áreas próximas a janelas. Além disso, a norma sugere o uso de sistemas de dimerização ou controle automático para integrar a luz natural e artificial de forma eficiente.
+
+\paragraph{Manutenção do Sistema de Iluminação}
+
+A manutenção do sistema de iluminação é essencial para garantir que os níveis de iluminância sejam mantidos ao longo do tempo. A norma recomenda que o projeto de iluminação inclua um plano de manutenção, com a substituição periódica das lâmpadas e a limpeza das luminárias e superfícies do ambiente. O fator de manutenção, que considera a depreciação do fluxo luminoso das lâmpadas e o acúmulo de sujeira, deve ser calculado para garantir que a iluminância mantida seja alcançada.
+
+\subsubsection{Requisitos para o Planejamento da Iluminação}
+
+A norma ISO/CIE 8995-1 fornece diretrizes detalhadas para o planejamento da iluminação em diferentes tipos de ambientes e atividades. A norma apresenta os requisitos de iluminância, Índice de Ofuscamento Unificado Limite \gls{UGRL} e do \gls{Ra} para uma variedade de ambientes, como escritórios, escolas, hospitais, indústrias e áreas de varejo.
+
+Por exemplo, para um escritório onde são realizadas tarefas de leitura e escrita, a norma recomenda uma iluminância mantida de 500 \gls{lux}, um \gls{UGRL} máximo de 19 e um \gls{Ra} mínimo de 80. Já para uma sala de cirurgia, a iluminância recomendada é de 1000 \gls{lux}, com um \gls{UGRL} máximo de 19 e um \gls{Ra} mínimo de 90.
+
+\subsubsection{Procedimentos de Verificação}
+
+A norma também estabelece procedimentos para a verificação do sistema de iluminação, garantindo que os requisitos sejam atendidos. Isso inclui a medição da iluminância em pontos específicos, a verificação do \gls{UGR} e a avaliação do \gls{Ra}. Além disso, a norma recomenda a documentação do fator de manutenção e a realização de medições periódicas para garantir que o sistema de iluminação continue a atender aos requisitos ao longo do tempo.
+
+\subsubsection{Considerações sobre Energia}
+
+A eficiência energética é um aspecto importante do projeto de iluminação. A norma recomenda que o sistema de iluminação seja projetado para atender aos requisitos de iluminação sem desperdício de energia. Isso pode ser alcançado através da seleção de equipamentos eficientes, como lâmpadas de baixo consumo e sistemas de controle automático, que ajustam a iluminação de acordo com a disponibilidade de luz natural e a ocupação do ambiente.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{NHO 11}
+
+A \gls{NHO} 11 \cite{NHO11}, intitulada "Avaliação dos níveis de iluminamento em ambientes internos de trabalho", estabelece critérios e procedimentos técnicos para a avaliação dos níveis de iluminância em ambientes de trabalho internos. A norma foi desenvolvida pela Fundacentro (Fundação Jorge Duprat Figueiredo de Segurança e Medicina do Trabalho) e substituiu a antiga NHT 10-I/E de 1986, trazendo atualizações importantes em relação às práticas de medição e avaliação da iluminação.
+
+A norma é uma ferramenta essencial para garantir que os ambientes de trabalho atendam aos requisitos mínimos de iluminância, promovendo a segurança, o conforto e a eficiência dos trabalhadores. A norma aborda tanto aspectos quantitativos, como a medição da iluminância, quanto aspectos qualitativos, como a avaliação de ofuscamento, cintilação e distribuição da luz.
+
+\subsubsection{Objetivos e Aplicação}
+
+O principal objetivo da \gls{NHO} 11 é estabelecer critérios e procedimentos para a avaliação dos níveis de iluminância em ambientes internos de trabalho, indicando os principais parâmetros que interferem na qualidade da iluminação. A norma se aplica a qualquer ambiente de trabalho interno, independentemente do setor ou atividade, e pode ser utilizada por profissionais de segurança do trabalho, engenheiros, arquitetos e técnicos responsáveis pela avaliação e manutenção dos sistemas de iluminação.
+
+A norma também aborda a detecção de não conformidades que possam comprometer a segurança e o desempenho dos trabalhadores, como ofuscamento, cintilação e efeitos estroboscópicos.
+
+\subsubsection{Procedimentos de Avaliação}
+
+A \gls{NHO} 11 estabelece um procedimento detalhado para a avaliação dos níveis de iluminância, que inclui:
+
+\begin{itemize}
+    \item \textbf{Avaliação Preliminar:} Antes de realizar as medições, é necessário fazer uma avaliação preliminar do ambiente de trabalho. Essa avaliação inclui a verificação de aspectos como ofuscamento, cintilação, efeito estroboscópico, direcionalidade da luz, sombras excessivas, aparência da cor e contraste. A norma fornece uma lista de verificação, que auxilia na identificação de problemas e na proposição de melhorias.
+    \item \textbf{Abordagem dos Locais e Condições de Trabalho:} É necessário identificar as atividades realizadas no ambiente, as áreas de tarefa e as áreas de trabalho. A descrição do ambiente de trabalho, incluindo o sistema de iluminação utilizado, tipos de luminárias e lâmpadas, é fundamental para a realização das medições. A norma recomenda que as medições sejam realizadas sob as condições mais desfavoráveis, como em dias nublados, para garantir que os resultados dependam apenas da iluminação artificial.
+    \item \textbf{Equipamentos de Medição:} Os medidores de iluminância (luxímetros) devem ser calibrados e certificados pelo Inmetro (Instituto Nacional de Metrologia, Qualidade e Tecnologia) ou por laboratórios acreditados. O equipamento deve ser capaz de medir a iluminância em diferentes tipos de lâmpadas, como LED, fluorescente e vapor de sódio. A calibração deve ser realizada periodicamente, conforme as recomendações do fabricante ou sempre que houver suspeita de dano no equipamento.
+    \item \textbf{Procedimento de Medição:} As medições devem ser realizadas com o sistema de iluminação em operação normal. A leitura deve ser feita no plano da tarefa visual, que pode ser horizontal, vertical ou inclinado. Quando o plano da tarefa não for definido, a medição deve ser realizada a 0,75 m do piso. A norma detalha os procedimentos para a determinação da iluminância média em ambientes retangulares, considerando diferentes configurações de luminárias.
+\end{itemize}
+
+\subsubsection{Critérios de Avaliação}
+
+A \gls{NHO} 11 estabelece que a avaliação do nível de iluminância deve ser feita ponto a ponto, comparando os valores medidos com os níveis mínimos de iluminância recomendados para cada tipo de tarefa ou atividade. A norma permite uma tolerância de 10\% abaixo do valor mínimo recomendado. Além disso, a iluminância medida na área da tarefa não deve ser inferior a 70\% da iluminância média do ambiente.
+
+A norma também define critérios para a uniformidade da iluminância, recomendando que a razão entre o maior valor de iluminância medido na área da tarefa e a iluminância média do ambiente não seja superior a 5:1. Para áreas de trabalho adjacentes, a razão da iluminância média não deve ultrapassar 5:1.
+
+\subsubsection{Manutenção do Sistema de Iluminação}
+
+A \gls{NHO} 11 enfatiza a importância da manutenção preventiva e corretiva do sistema de iluminação. A limpeza das luminárias, a substituição de lâmpadas e a verificação periódica dos níveis de iluminância são essenciais para garantir que o sistema de iluminação continue a atender aos requisitos mínimos. A periodicidade da manutenção depende das características do ambiente de trabalho, como a sujidade e o tipo de atividade realizada.
+
+\subsubsection{Relatório de Avaliação}
+
+A norma estabelece que o relatório técnico deve documentar todos os aspectos da avaliação, incluindo:
+
+\begin{itemize}
+    \item Introdução, com os objetivos do trabalho e justificativa;
+    \item Instrumental utilizado e certificado de calibração;
+    \item Critérios e procedimentos de avaliação adotados;
+    \item Descrição do ambiente de trabalho, atividades realizadas e sistema de iluminação;
+    \item Dados obtidos, incluindo parâmetros quantitativos e qualitativos;
+    \item Interpretação dos resultados e recomendações.
+\end{itemize}
+
+O relatório deve ser claro e detalhado, permitindo que os responsáveis pela manutenção do sistema de iluminação possam tomar as medidas necessárias para corrigir eventuais não conformidades.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

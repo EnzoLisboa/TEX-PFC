@@ -1,0 +1,64 @@
+% 
+% Obrigatório em PFC e Pré-Projeto
+% 
+\chapter{Introdução}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A iluminação é um importante fator para garantir a segurança, o conforto e a eficiência em ambientes de trabalho. Uma iluminação adequada não apenas melhora a produtividade, mas também reduz riscos de acidentes e previne problemas de saúde, como fadiga ocular, dores de cabeça e transtornos posturais. Por outro lado, ambientes mal iluminados podem ser considerados insalubres, comprometendo a qualidade de vida dos trabalhadores e aumentando a probabilidade de erros e acidentes. Diante disso, normas técnicas como a Norma Brasileira (\gls{NBR}) 8995-1 da Associação Brasileira de Normas Técnicas (\gls{ABNT}) em conformidade com a Organização Internacional para Padronização (\gls{ISO}) e a Comissão Internacional de Iluminação (\gls{CIE}) e como a Norma de Higiene Ocupacional (\gls{NHO}) 11 estabelecem critérios mínimos de iluminância para diferentes tipos de ambientes e tarefas, visando promover um ambiente de trabalho seguro e produtivo.
+
+A \gls{NBR} 8995-1 define os requisitos de iluminação para ambientes internos, estabelecendo níveis de iluminância, controle de ofuscamento e aspectos relacionados à qualidade da luz, como a reprodução de cores. Já a \gls{NHO} 11, desenvolvida pela Fundacentro, fornece diretrizes para a avaliação dos níveis de iluminância em ambientes de trabalho, incluindo procedimentos de medição e critérios de conformidade. Ambas as normas destacam a importância de uma iluminação adequada para a saúde e segurança dos trabalhadores, bem como para a eficiência energética.
+
+No entanto, a manutenção dos níveis de iluminância recomendados pode ser um desafio, especialmente em ambientes dinâmicos onde as condições de iluminação natural variam ao longo do dia. Sistemas de iluminação convencionais, que operam com intensidade fixa, muitas vezes não são capazes de se adaptar a essas variações, resultando em desperdício de energia ou em níveis de iluminação inadequados. Nesse contexto, um sistema adpatativo de iluminação surge como uma solução promissora, permitindo o ajuste automático da intensidade luminosa com base nas condições do ambiente e nas necessidades específicas de cada tarefa.
+
+A segurança do trabalho é diretamente impactada pela qualidade da iluminação. Ambientes mal iluminados dificultam a percepção de riscos, aumentando a probabilidade de acidentes. Além disso, a exposição prolongada a níveis inadequados de iluminação pode levar a problemas de saúde, como fadiga visual, estresse e até mesmo transtornos psicológicos. Por outro lado, uma iluminação bem planejada e ajustada às necessidades do ambiente pode melhorar a concentração, reduzir erros e aumentar a eficiência operacional.
+
+A eficiência energética também é um aspecto crucial quando se fala em iluminação. Sistemas de iluminação adaptativa podem contribuir significativamente para a redução do consumo de energia, ajustando a intensidade luminosa conforme a necessidade real e aproveitando ao máximo a iluminação natural. Isso não apenas reduz os custos operacionais, mas também alinha-se às demandas contemporâneas de sustentabilidade e redução do impacto ambiental.
+
+Os sistemas embarcados são dispositivos computacionais projetados para executar tarefas específicas, frequentemente em tempo real. Eles combinam hardware e software dedicados para garantir alto desempenho e eficiência energética. Esses sistemas estão presentes em diversos setores, incluindo automação industrial, dispositivos médicos, telecomunicações.
+
+Este trabalho propõe o desenvolvimento de um sistema embarcado de iluminação adaptativa que se adapte dinamicamente às condições do ambiente, mantendo os níveis de iluminância em conformidade com as normas técnicas e de higiene ocupacional. O sistema utiliza sensores de luminosidade para monitorar a iluminação ambiente e um controlador Fuzzy para ajustar a intensidade luminosa de forma precisa e eficiente. Além disso, o sistema integra protocolos de comunicação sem fio e um cliente gráfico, permitindo a coleta e transmissão de dados em tempo real, bem como o controle remoto da iluminação.
+
+A implementação de um sistema de iluminação adptativa não apenas garante o cumprimento das normas técnicas, mas também promove a eficiência energética, reduzindo o consumo de energia elétrica ao ajustar a iluminação conforme a necessidade real. Além disso, o sistema melhora a segurança e saúde dos trabalhadores, evitando problemas relacionados à má iluminação, como fadiga visual e acidentes de trabalho.
+
+Com este trabalho, espera-se contribuir para a melhoria da qualidade da iluminação em ambientes de trabalho, promovendo a segurança, a saúde e a eficiência energética, alinhadas às demandas contemporâneas de sustentabilidade e conformidade com as normas técnicas.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Obrigatório em PFC e Pré-Projeto
+% 
+\section{Objetivo Geral}
+
+Desenvolver um sistema de iluminação adaptativa que se adeque dinamicamente às condições do ambiente, mantendo os níveis de iluminância em conformidade com as normas técnicas \gls{NBR} 8995-1 e \gls{NHO} 11, visando promover a segurança, o conforto e a eficiência energética em ambientes de trabalho.
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Obrigatório em PFC e Pré-Projeto
+% 
+\subsection{Objetivos Específicos}
+
+\begin{enumerate}
+    \item Realizar uma análise detalhada das normas \gls{NBR}  8995-1 e \gls{NHO} 11 para compreender os requisitos mínimos de iluminância e os critérios de avaliação em ambientes de trabalho;
+    \item Projetar e implementar um sistema que utilize sensores de luminosidade, um controlador Fuzzy, um cliente \gls{PyQt5} e protocolos de comunicação como \gls{BLE} e \textit{WebSocket} para ajustar automaticamente a intensidade luminosa;
+    \item Realizar testes para verificar a eficácia do sistema em manter os níveis de iluminância dentro dos limites recomendados pelas normas técnicas, comparando os resultados com medições de um luxímetro de referência;
+    \item Demonstrar como o sistema de iluminação adaptativo pode reduzir o consumo de energia ao ajustar a iluminação conforme a necessidade real, contribuindo para a sustentabilidade;
+    \item Elaborar um relatório técnico detalhado e apresentar os resultados obtidos, incentivando a aplicação do sistema em outros ambientes e futuras pesquisas na área de luminotécnica.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Obrigatório em PFC e Pré-Projeto
+% 
+
+\section{Justificativa}
+
+A iluminação inadequada no ambiente de trabalho pode causar uma série de problemas, como fadiga ocular, cansaço, dores de cabeça, estresse e até mesmo aumentar o risco de acidentes. Da mesma forma, um excesso de luz pode comprometer a segurança e o bem-estar, resultando em ofuscamento, desconforto visual e impactos negativos na saúde. Tanto a falta quanto o excesso de iluminação podem gerar erros nas atividades, comprometer a qualidade do trabalho e reduzir a produtividade \cite{ILO2007}. Pesquisas indicam que uma iluminação adequada proporciona benefícios significativos, incluindo maior eficiência e menos falhas. Há exemplos de fábricas onde ajustes na iluminação levaram a um aumento de 10\% na produtividade e uma redução de 30\% nos erros \cite{ILO1998}.
+
+Em muitos ambientes industriais, a iluminação é composta por uma combinação de fontes naturais e artificiais. No entanto, nem sempre há um planejamento adequado que leve em consideração as necessidades específicas de cada tarefa. Muitas vezes, presume-se que todas as áreas da fábrica demandam o mesmo nível de iluminação, ignorando que diferentes tipos de trabalho exigem intensidades luminosas distintas para garantir conforto, precisão e eficiência. A melhoria na iluminação não significa necessariamente a necessidade de instalar mais fontes de luz ou aumentar o consumo de eletricidade. Em muitos casos, a solução está em otimizar o uso das luzes já disponíveis \cite{ILO2007}.
+
+Além das questões de saúde e segurança ocupacional a eficiência energética é uma preocupação global. Segundo a Empresa de Pesquisa Energética (\gls{EPE}) no Brasil a demanda de energia elétrica irá triplicar até 2050. Mudanças nos comportamentos de consumo e em modelos de negócios, a eficiência energética e a eletrificação podem influenciar na necessidade de energia elétrica \cite{EPE2025}.
+
+Em 2023, o consumo de energia per capita no Brasil ainda era metade do observado na União Europeia, indicando um potencial significativo para a adoção de práticas e tecnologias que promovam a eficiência energética \cite{EPE2025}. Quase 20\% do consumo de eletricidade em todo o mundo foi atribuído à eletricidade para iluminação \cite{UNEP2013}.
+
+Nesse contexto, o desenvolvimento de um sistema de iluminação adaptativa, alinhados com normas como a ABNT NBR ISO/CIE 8995-1, torna-se essencial para garantir segurança laboral, o uso racional da energia e a conformidade com padrões internacionais.

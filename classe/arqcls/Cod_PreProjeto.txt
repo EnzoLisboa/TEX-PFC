@@ -1,0 +1,6 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% DOCUMENTCLASS %%%%%%%%%
+%
+\documentclass[preprojeto]{classe/cls-PFC-COEEL}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

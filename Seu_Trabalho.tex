@@ -1,0 +1,206 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Seu trabalho começa aqui
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Desenvolvimento do Sistema}
+
+Este capítulo apresenta o desenvolvimento do sistema de iluminação inteligente, abordando o projeto do hardware, arquitetura de comunicação e a implementação do controle fuzzy. A arquitetura geral do sistema embarcado foi organizada em três módulos principais: sensor, controle e supervisório. Esses módulos atuam de forma conjunta, permitindo a coleta de dados de iluminância, o processamento das informações, o acionamento dinâmico da potência e o monitoramento do sistema. O diagrama de blocos na Figura \ref{fig:diag_blocos_sistema} apresenta a relação entre os módulos e o fluxo de comunicação entre os componentes do sistema.
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  node distance=10mm and 15mm,
+  block/.style={draw, rounded corners=2mm, align=center, minimum width=3.6cm, minimum height=1.05cm},
+  main/.style={-Latex, very thick},
+  comm/.style={-Latex, thick, densely dashed},
+  aux/.style={-Latex, dashed, thick},
+  group/.style={draw, rounded corners=3mm, dashed, gray!70, inner sep=4mm}
+]
+
+% --- Linha superior ---
+\node[block] (mcur) {Microcontrolador \\ \footnotesize(Remoto)};
+\node[block, right=of mcur] (ctrl) {Microcontrolador \\ \footnotesize(Central)};
+\node[block, right=of ctrl] (zc) {Detector de \\ passagem por zero};
+
+% --- Linha inferior ---
+\node[block, below=of mcur] (sens) {Sensores\\ de iluminância};
+\node[block, below=of ctrl] (drv) {Disparo de Potência\\ \footnotesize(TRIAC)};
+\node[block, below=of drv] (load) {Lâmpada};
+
+% --- Supervisório e registro ---
+\node[block, above=of ctrl] (sup) {Aplicativo\\ em tempo real};
+\node[block, above=of mcur] (log) {Registro de dados};
+
+% --- Conexões principais ---
+\draw[main] (sens) -- (mcur);
+\draw[comm] (mcur) -- (ctrl);
+\draw[main] (ctrl) -- (drv);
+\draw[main] (drv) -- (load);
+\draw[main] (zc) -- (ctrl);
+
+% --- Supervisório e logging ---
+\draw[aux] (ctrl) -- (sup);
+\draw[main] (sup) -- (log);
+
+% --- Contornos (grupos) ---
+\node[group, fit=(mcur)(sens)] (gSens) {};
+\node[group, fit=(ctrl)(zc)(drv)] (gCtrl) {};
+\node[group, fit=(log)(sup)] (gSup) {};
+
+% --- Rótulos dos grupos ---
+\node[font=\bfseries\footnotesize, gray!70!black, anchor=south east]
+  at ([xshift=6mm,yshift=-5mm]gSens.south) {Módulo Sensor};
+\node[font=\bfseries\footnotesize, gray!70!black, anchor=south east]
+  at ([xshift=-1mm,yshift=-0.5mm]gCtrl.north east) {Módulo de Controle};
+\node[font=\bfseries\footnotesize, gray!70!black, anchor=south east]
+  at ([xshift=-1mm,yshift=-1mm]gSup.north east) {Módulo Supervisório};
+
+
+\end{tikzpicture}
+\caption{Diagrama de blocos do sistema: sensoriamento, controle e supervisão.}
+\label{fig:diag_blocos_sistema}
+\end{figure}
+
+\section{Projeto do Módulo de Controle}
+
+O Módulo de Controle é o elemento central do sistema, ele é o responsável por receber as medições, processar os dados, executar o algorítmo de controle, comandar o acionamento da carga e gerenciar a comunicação do sistema.
+
+Os pontos centrais para o projeto foram:
+\begin{itemize}
+    \item Método de controle de potência;
+    \item Isolamento entre os estágios lógico e de potência;
+    \item Execução em tempo real;
+    \item Confiabilidade na comunicação;
+    \item Eficiência energética e robustez.
+\end{itemize}
+
+Com base nesses pontos o circuito do módulo de controle foi desenvolvido no software \textit{KiCad} como mostra a Figura \ref{fig:proj_contr}
+
+\subsection{Hardware}
+
+\subsubsection{Microcontrolador}
+
+O microcontrolador é o núcleo do módulo de controle, a escolha do dispositivo adequado influencia diretamente o desempenho, a estabilidade e a eficiência do sistema embarcado. 
+A Tabela~\ref{tab:microcontroladores} apresenta um comparativo entre os principais modelos considerados para este projeto, destacando os parâmetros técnicos mais relevantes para a aplicação.
+
+
+\begin{table}[htb]
+  \centering
+  \caption{Comparativo entre microcontroladores candidatos ao módulo de controle.}
+  \begin{tabular}{m{3.5cm}m{2.4cm}m{2.2cm}m{2.6cm}m{3.8cm}}
+    \Linha % linha grossa
+    {\bf Modelo} & {\bf Arquitetura} & {\bf Frequência} & {\bf Comunicação} & {\bf Observações} \\
+    \Linha % linha grossa
+    Arduino Uno & 8 bits & 16 MHz & UART, I\textsuperscript{2}C, SPI & Baixo custo e simplicidade, porém desempenho limitado para controle em tempo real. \\
+    \hline
+    ESP8266 (NodeMCU-V3) & 32 bits & 80 MHz & UART, SPI, I\textsuperscript{2}C, Wi-Fi & Boa conectividade Wi-Fi, mas poucos recursos de E/S e menor capacidade de processamento. \\
+    \hline
+    ESP32-S (NodeMCU-32S) & 32 bits Dual-Core & 240 MHz & UART, SPI, I\textsuperscript{2}C, Wi-Fi, BLE & Alto desempenho e conectividade dupla (Wi-Fi e BLE), ideal para controle em tempo real e comunicação com sensores e supervisório. \\
+    \Linha % linha grossa
+  \end{tabular}    
+  \FonteTab{Próprio autor, com base em \cite{Espressif, Arduino, EspressifESP8266}.}
+  \label{tab:microcontroladores}
+\end{table}
+
+Com base nesses fatores, o microcontrolador \textit{ESP32-S (NodeMCU-32S)} foi selecionado para o módulo de controle. 
+A escolha se deve ao seu processador \textit{dual-core} de até 240 MHz, que permite a execução simultânea do algoritmo fuzzy e das rotinas de comunicação, além do suporte nativo a \textit{Wi-Fi} e \textit{Bluetooth} de Baixa Energia (\gls{BLE}), que viabiliza a integração com os módulos sensores e o sistema supervisório. 
+Essas características garantem baixo tempo de resposta, estabilidade de comunicação e alta eficiência energética, fatores essenciais para a operação do sistema em tempo real.
+
+\subsubsection{Alimentação}
+
+O circuito de alimentação deve fornecer energia estável para todos os componentes do módulo de controle, para essa função foi escolhido o módulo conversor HLK-5M05, que converte a tensão de entrada de 127/220 V CA para uma saída de 5 V CC regulada, com corrente máxima de 1 A.
+
+Além do módulo conversor, foi implementada uma etapa de filtragem utilizando dois capacitores em paralelo: um eletrolítico de 100 µF e um cerâmico de 100 nF. Essa associação é recomendada por ampliar a faixa de atenuação de ruídos. \cite{TexasInstr630}
+
+\subsubsection{Detector de Pasagem por Zero}
+
+O controle de potência empregado neste projeto baseia-se no método de corte de fase
+para que o controle seja preciso e estável, é indispensável identificar o momento exato em que a tensão alternada cruza o valor zero. Esse sincronismo garante que o disparo do TRIAC ocorra de forma coerente com a fase da rede elétrica, evitando oscilações de brilho, ruídos eletromagnéticos e distorções harmônicas. Com isso torna-se necessário o uso de um circuito detector de passagem por zero.
+
+O detector de passagem por zero sincroniza o controle ao detectar quando a tensão muda de polaridade \cite{Vieira2024}. O circuito utiliza uma ponte retificadora para gerar uma forma de onda pulsante e um optoacoplador para garantir o isolamento elétrico entre os estágios de potência e controle, a cada cruzamento por zero, o pulso gerado é identificado pelo microcontrolador.
+
+A ponte retificadora 2W10 foi selecionada por suportar correntes e tensões reversas superiores às condições de operação do circuito de detecção, além de apresentar encapsulamento compacto e fácil integração na placa de circuito impresso.
+
+O optoacoplador 4N25 foi adotado por sua ampla disponibilidade, baixo custo e características ideais para a função de isolamento entre os estágios de potência e controle. O dispositivo oferece alta imunidade a ruídos e tempo de comutação compatível com a frequência da rede elétrica, permitindo detectar com precisão o instante de passagem por zero.
+
+\subsubsection{Circuito de Disparo de Potência}
+
+O circuito de disparo de potência é responsável por controlar o momento de condução da corrente alternada que alimenta a lâmpada, permitindo o ajuste de sua intensidade luminosa. Ele utiliza o optoacoplador MOC3021M, que garante isolamento entre o microcontrolador e a rede elétrica, e o TRIAC BT136, responsável pela comutação da carga. Como o MOC3021M é um modelo sem detecção de cruzamento por zero, o disparo pode ocorrer em qualquer ponto do semiciclo da rede, possibilitando o controle por corte de fase realizado pelo algoritmo fuzzy do sistema.
+
+O sinal de disparo gerado pelo microcontrolador aciona o LED interno do MOC3021M por meio de um resistor limitador, conduzindo o pulso ao gate do BT136, que passa a conduzir até o final do semiciclo. Dessa forma, ao variar o atraso do pulso de disparo, é possível ajustar a potência entregue à lâmpada.
+
+\subsection{Firmware}
+
+O módulo de controle possui um firmware desenvolvido para o microcontrolador ESP32-S, responsável por gerenciar a comunicação entre os módulos, executar o ciclo de controle fuzzy que regula a luminosidade do ambiente e verificar possíveis erros alertando o usuário.
+
+\subsubsection{Arquitetura Geral}
+
+A arquitetura geral do firmware é baseada em uma máquina de estados que gerencia o funcionamento do sistema em diferentes modos operacionais sendo eles: Esperando sensores; Controle ativo; Estabilizando; Sensores em \textit{standby}; Retomada pós-\textit{standby}. As transições entre os estados são acompanhadas por processos de registro, atualização de contadores e configuração de temporizadores, garantindo que o sistema funcione de forma ordenada e previsível.
+
+\subsubsection{Inicialização do firmware}
+
+Durante a inicialização o controlador configura os principais recursos de hardware e software necessários para o funcionamento do sistema, essa fase inclui:
+\begin{itemize}
+    \item \textbf{Carregamento de parâmetros armazenados,} como \textit{setpoint} e modo de operação, a partir da memória não volátil;
+    \item \textbf{Configuração dos pinos e temporizadores,} incluindo a detecção de passagem por zero;
+    \item \textbf{Inicialização do controle fuzzy,} com a definição dos conjuntos de pertinência e da base de regras;
+    \item \textbf{Estabelecimento da comunicação de rede,} permitindo a troca de informações com o Módulo Supervisório;
+    \item \textbf{Entrada no estado de espera dos sensores,} mantendo a lâmpada desligada até que todas as condições de operação estejam seguras.
+\end{itemize}
+
+Essas etapas garantem que o sistema funcione apenas com a configuração completa de todos os subsistemas.
+
+\subsubsection{Ciclo principal}
+
+O ciclo principal do firmware coordena três tarefas centrais:
+\begin{itemize}
+    \item \textbf{Aquisição e validação de dados:} as leituras provenientes dos sensores são atualizadas e filtradas, mantendo a coerência das informações e detectando automáticamente falhas de  comunicação dos sensores;
+    \item \textbf{Execução do controle fuzzy:} o controlador compara a iluminância medida com o \textit{setpoint} e aplica a lógica fuzzy gerando um novo percentual de ajuste da lâmpada;
+    \item \textbf{Gestão de estados e \textit{standby}:} temporizadores determinam os intervalos de estabilização e de \textit{standby}. Durante o modo \textit{standby} os sensores entram em baixa atividade e a potência da lâmpada é mantida até o reinício do ciclo de controle.
+\end{itemize}
+
+\subsubsection{Lógica fuzzy}
+
+O controle do sistema é realizado com base numa lógica fuzzy projetada para o ajuste de potência da lâmpada conforme a variação da iluminância ambiente. Três variáveis linguísticas compõem a base de regras:
+\begin{itemize}
+    \item \textbf{Erro,} subtração entre o \textit{setpoint} e a iluminância medida, organizado em cinco conjuntos: muito abaixo, abaixo, pequeno, acima e muito acima;
+    \item \textbf{Variação do Erro,} diferença entre o erro atual e o erro anterior, ordenada em três conjuntos: diminuição rápida, estável e aumento rápido;
+    \item \textbf{Ajuste de Potência,} variável de saída que determina o percentual da potência que deve ser ajustada, compreendida em 5 conjuntos: diminuir muito, diminuir, manter, aumentar e aumentar muito.
+\end{itemize}
+
+A base de regras foi desenvolvida para garantir respostas rápidas quando o erro está elevado ao mesmo tempo em que corrige suavemente quando o erro está próximo a zero. O processo fuzzyfica as entradas, aplica inferência do tipo Mamdani e defuzzyfica pelo método do centroide.
+
+\subsubsection{Acionamento do TRIAC}
+
+O acionamento da carga é ralizado por meio de um circuito de disparo de TRIAC, sincronizado a rede elétrica. O firmware converte o percentual de potência calculado pelo controle fuzzy em um tempo de atraso do disparo, controlando assim a fração de condução desejada em cada semiciclo da tensão alternada.
+
+Tabelas e rotinas de interpolação garantem a correspodência entre o valor de potência e o tempo de disparo. Interrupções independentes controlam o instante do disparo e o desligamento do pulso, mantendo o sincronismo e garantindo que outras tarefas do microcontrolador não vão atrapalhar o acionamento do TRIAC.
+
+\subsubsection{Comunicação e validação}
+
+O controlador comunica-se com os sensores por meio de \gls{BLE} e com o sistema externo por meio de \textit{Wi-Fi}, garantindo a troca contínua de dados de iluminância e parâmetros de operação. As mensagens recebidas passam por verificação de integridade e consistência, prevenindo falhas causadas por leituras incorretas ou atrasadas.
+O firmware também monitora o estado dos sensores e da potência aplicada, adotando modo seguro em caso de perda de comunicação, saturação ou ausência de dados. As últimas configurações válidas são gravadas na memória não volátil, permitindo a retomada estável do controle após reinicializações.
+
+\section{Projeto do Módulo Sensor}
+
+
+
+\section{Projeto do Módulo Supervisório}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Validação do Sistema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Discussão dos Resultados}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Análise dos Resultados}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
